@@ -4,7 +4,7 @@ import Admin from "./Components/Admin";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import { auth } from "./firebase";
-
+//firebase deploy --only hosting:crud-login-777
 function App() {
   const [firebaseUser, setFirebaseUser] = React.useState(false);
 

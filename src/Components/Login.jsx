@@ -43,6 +43,10 @@ const Login = (props) => {
         email: res.user.email,
         uid: res.user.uid,
       });
+      await db.collection(res.user.uid).add({
+        name:"Tarea de ejemplo",
+        fecha: Date.now()
+      })
       setEmail("");
       setPass("");
       setError(null);
@@ -83,7 +87,7 @@ const Login = (props) => {
   return (
     <div>
       <h3 className="text-center text-primary">
-        {esRegistro ? "Registro de usuario" : "Login de acceso"}
+        {esRegistro ? "Registro de usuario" : "Login"}
       </h3>
       <hr />
       <div className="row justify-content-center">
