@@ -2,7 +2,6 @@ import React from "react";
 import { auth, db } from "../firebase";
 import { withRouter } from "react-router-dom";
 
-
 const Login = (props) => {
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
@@ -30,8 +29,8 @@ const Login = (props) => {
 
     if (esRegistro) {
       registrar();
-    }else{
-       login();
+    } else {
+      login();
     }
   };
 
@@ -44,13 +43,13 @@ const Login = (props) => {
         uid: res.user.uid,
       });
       await db.collection(res.user.uid).add({
-        name:"Tarea de ejemplo",
-        fecha: Date.now()
-      })
+        name: "Tarea de ejemplo",
+        fecha: Date.now(),
+      });
       setEmail("");
       setPass("");
       setError(null);
-      props.history.push('/admin')
+      props.history.push("/admin");
     } catch (error) {
       console.log(error);
       if (error.code === "auth/invalid-email") {
@@ -64,14 +63,14 @@ const Login = (props) => {
 
   const login = React.useCallback(async () => {
     try {
-      const res = await auth.signInWithEmailAndPassword(email, pass)
-      console.log(res.user)
+      const res = await auth.signInWithEmailAndPassword(email, pass);
+      console.log(res.user);
       setEmail("");
       setPass("");
       setError(null);
-      props.history.push('/admin')
+      props.history.push("/admin");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.code === "auth/invalid-email") {
         setError("Email no valido");
       }
@@ -82,7 +81,7 @@ const Login = (props) => {
         setError("Contraseña incorrecta");
       }
     }
-  }, [email, pass, props.history])
+  }, [email, pass, props.history]);
 
   return (
     <div>
@@ -120,6 +119,15 @@ const Login = (props) => {
             >
               {esRegistro ? "¿Ya tienes cuenta?" : "¿No estas registrado?"}
             </button>
+            {!esRegistro ? (
+              <button
+                className="btn-warning btn-sm text-light"
+                type="button"
+                onClick={() => props.history.push("/reset")}
+              >
+                Recuperar contraseña
+              </button>
+            ) : null}
           </form>
         </div>
       </div>
@@ -127,4 +135,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter( Login )
+export default withRouter(Login);

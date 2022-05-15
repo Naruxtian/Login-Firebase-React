@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Admin from "./Components/Admin";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
+import Reset from "./Components/Reset";
 import { auth } from "./firebase";
 //firebase deploy --only hosting:crud-login-777
 function App() {
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <Admin />
+          </Route>
+          <Route path="/reset">
+            <Reset/>
           </Route>
           <Route path="/">
             <h2 className="text-center text-danger">Inicio</h2>
